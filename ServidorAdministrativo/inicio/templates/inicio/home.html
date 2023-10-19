@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'inicio/css/estilos.css' %}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inicio</title>
+</head>
+<body>
+    <h1>Bienvenido</h1>
+    {% if user.is_authenticated %}
+    <nav>
+        <ul>
+            <li>
+                <a href="#">@{{ user.username }}</a>
+            </li>
+            <li>
+                <a href="{% url 'logout' %}">Cerrar sesión</a>
+            </li>
+        </ul>
+    </nav>
+    <table>
+        <tr>
+            <th>Usuarios</th>
+        </tr>
+        {% for c in usuarios %}
+        <tr>
+            <td>{{c.username}}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    {% else %}
+    <nav>
+        <ul>
+            <li>
+                <a href="{% url "login" %}">Iniciar sesión</a>
+            </li>
+        </ul>
+    </nav>
+    {% endif %}
+</body>
+</html>
